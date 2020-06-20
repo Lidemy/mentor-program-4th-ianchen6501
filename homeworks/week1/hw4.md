@@ -147,17 +147,17 @@ Github 是基於 Git 技術的雲端平台， Github 提供 Repository (網路�
 ``` c
 git remote add origin https://github.com/ianchen6501/test.git #上傳位址
 ```
-+ Git Push   
++ git Push   
 上傳 commit 或 branch 到 repository，指令如下
 ```
 git push origin branchname / commitname
 ```
-+ Git Pull
++ git Pull
 把 repository 上的版本給抓下來，當然抓下來的過程中也有可能遇到 conflict ，這時候的解決方式也一樣是進入想同步的檔案 vim 然後儲存後重新 add / commit 。
 ```
 git pull origin branchname / commitname
 ```
-+ Git Clone
++ git Clone
 把 Github 上的檔案完整給複製下來，可以在 Github 的右上角照到綠色的 Clone or Download 鍵，之後在終端打入 " git clone + 網址 "
 就可以下載到本地，但要注意的是本地如果修改後是無法 Push 到不屬於自己的 repository 上面去的，解決的方式就是在 Github 上面再fork 一個檔案到自己得 repository 重新 clone 一次。
 
