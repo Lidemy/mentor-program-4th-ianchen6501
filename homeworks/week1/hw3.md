@@ -69,6 +69,10 @@ h0w 哥以下我把要如何建立一個叫 wifi 的資料夾及在裡面建立�
 ```
 mkdir wifi
 ```
+4. 接著移動到 wifi 資料夾
+```
+cd wifi
+```
 3. 接著建立 afu.js 檔案
 ```
 touch afu.js
