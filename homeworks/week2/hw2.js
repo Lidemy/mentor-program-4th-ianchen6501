@@ -4,7 +4,7 @@ function capitalize(str) {
     return StrCap
 }
 
-console.log(capitalize('hello'));
+console.log(capitalize('you and me'));
 console.log(capitalize('2020.06.28'));
 console.log(capitalize('????'));
 console.log(capitalize('    '));

@@ -10,4 +10,4 @@ function reverse(str) {
 
 reverse('hello');
 reverse('1234  56');
-reverse('  haha  ')
+reverse('lslslls')

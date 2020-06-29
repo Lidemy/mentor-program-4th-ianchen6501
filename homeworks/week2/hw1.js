@@ -9,6 +9,6 @@ function printStars(n) {
     }
 }
 
-printStars(31);
+printStars(10);
 
 

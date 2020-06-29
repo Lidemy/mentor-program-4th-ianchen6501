@@ -9,4 +9,4 @@ function printFactor(n) {
     }
 }
 
-printFactor(60);
+printFactor(99);
