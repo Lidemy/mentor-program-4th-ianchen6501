@@ -12,7 +12,7 @@ Git branch HW_week_1
 ```
 Git commit -am "description"
 ```
-4. 把作業push到 Github repository。
+4. 把作業 push 到 Github repository。
 ```
 Git push origin HW_week_1
 ```
