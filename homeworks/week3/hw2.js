@@ -1,48 +1,36 @@
-var readline = require('readline');
-var rl = readline.createInterface({
-    input: process.stdin
-})
-//設定 readline 標準輸入
-var lines = []
-rl.on('line', function (line){
-    lines.push(line)
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
 });
-//把輸入的資料放入一個 arr ，按 ctrl+c 可以結束程式並跳出
-rl.on('close', function(){
-    solve(lines)
-})
-//輸入結束，arr 裡面已經有輸入的資料，並執行 solve function
-
-function solve (lines){
-    var inputArr = lines[0].split(' ') 
-    var start = Number(inputArr[0])
-    var end = Number(inputArr[1])
-    var daffodils = []
-    for (var i=start; i<=end; i++){
-        if(i === daffo(i)){
-            console.log(i)
-        }
-    }
+// 設定 readline 標準輸入
+const lines = [];
+rl.on('line', (line) => {
+  lines.push(line);
+});
+function power(base, n) {
+  return base ** n;
 }
-
-
-
-function daffo(i){
-    var str = String(i)
-    //console.log(str)
-    var arr = str.split('')
-    var sum = 0
-    //console.log(typeof(sum))
-    for(i=0; i<arr.length; i++){
-        sum += power(Number(arr[i]),arr.length)
-    }
-    return sum
+function daffo(i) {
+  const str = String(i);
+  const arr = str.split('');
+  let sum = 0;
+  for (let j = 0; j < arr.length; j += 1) {
+    sum += power(Number(arr[j]), arr.length);
+  }
+  return sum;
 }
-
-function power(base,n){
-    var result = base
-    for(i=1; i<n; i++){
-            result =result * base
+function solve(n) {
+  const inputArr = n[0].split(' ');
+  const start = Number(inputArr[0]);
+  const end = Number(inputArr[1]);
+  for (let i = start; i <= end; i += 1) {
+    if (i === daffo(i)) {
+      console.log(i);
     }
-    return result
+  }
 }
+rl.on('close', () => {
+  solve(lines);
+});
+// 輸入結束，arr 裡面已經有輸入的資料，並執行 solve function
