@@ -1,7 +1,7 @@
 const request = require('request');
 const process = require('process');
 
-request(`https://restcountries.eu/rest/v2/name/' + ${process.argv[2]}`,
+request(`https://restcountries.eu/rest/v2/name/${process.argv[2]}`,
   (error, response, body) => {
     const json = JSON.parse(body);
     if (response.statusCode >= 200 && response.statusCode < 300) {
