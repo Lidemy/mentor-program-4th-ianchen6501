@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>'新拖延運動'</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <style>
+    html {
+      font-size: 12px;
+      font-family: "微軟正黑體";
+    }
+
+    html, body, h1, h2, h3, h4, p {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .debug *, .debug {
+      outline: 1px solid gold;
+    }
+
+    .wrapper  {
+      max-width: 645px;
+      margin: 0px;
+    }
+
+    .topbar {
+      background: #fad312;
+      width: 100%;
+      height: 8px;
+    }
+
+    .header, .section {
+      margin-left:42px ;
+      margin-right: 42px;
+    }
+
+    .header h1 {
+      padding-top:54px ;
+      padding-bottom: 35px;
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    .header h2 {
+      font-size: 14px;
+    }
+
+    .header h2 + h2 {
+      margin-top: 11px;
+    }
+
+    .header h3 {
+      margin-top: 22px; 
+      font-size: 16px;
+      color: #e74149;
+    }
+
+    .section__title {
+      font-size: 20px;
+      margin-top: 50px;
+    }
+
+    .section__subtitle {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .section__title .text-style-1 {
+      color: var(--faded-red);
+    }
+
+    .section__input {
+      border: 1px solid #d0d0d0;
+      height: 23px;
+      width: 287px;
+      margin-top: 20px;
+    }
+
+    input[type=radio] { 
+      margin-top: 24px;
+      font-size: 14px;
+      position: relative;
+    }
+
+    input[type=radio]:after { 
+      position: absolute;
+      top:100%;
+      left: 80px;
+    }
+
+    .button {
+      display: inline-block;
+      height: 40px;
+      width: 92px;
+      background: #fad312;
+      border-radius: 3px;
+      margin-top: 55px;
+      font-size: 15px;
+      text-align: center;
+      line-height: 40px;
+      transition: transform 0.1s;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+
+    }
+
+    @media(max-width: 420px) {
+    .header h1 {
+      font-size: 28px;
+    }
+    
+    .section__input {
+      width: 200px;
+    }
+    }
+
+
+
+
+
+
+
+  </style>
+</head>
+<body class='wrapper'>
+  <div class='topbar'></div>
+  <header class='header'>
+    <h1>新拖延運動報名表單</h1>
+    <h2>活動日期：2020/12/10 ~ 2020/12/11</h2>
+    <h2>活動地點：台北市大安區新生南路二段1號</h2>
+    <h3>*必填</h3>
+  </header>
+  <div class='section'>
+    <section class='section__title'>
+      暱稱 <span style='color: #e74149'>*</span>
+    </section>
+    <form>
+      <input class='section__input' type='text' placeholder='您的回答'/>
+    </form>
+  </div>
+
+  <div class='section'>
+    <section class='section__title'>
+      電子郵件 <span style='color: #e74149'>*</span>
+    </section>
+    <form>
+      <input class='section__input' type='text' placeholder='您的電子郵件'/>
+    </form>
+  </div>
+
+  <div class='section'>
+    <section class='section__title'>
+      手機號碼 <span style='color: #e74149'>*</span>
+    </section>
+    <form>
+      <input class='section__input' type='text' placeholder='您的手機號碼'/>
+    </form>
+  </div>
+
+  <div class='section'>
+    <section class='section__title'>
+      報名類型 <span style='color: #e74149'>*</span>
+    </section>
+    <form>
+      <div>
+        <label>
+          <input type='radio' class='section__radio' name='section' />
+          躺在床上用想像力實作
+        </label>
+      </div>
+      <div>
+        <input type='radio' class='section__radio' name='section' id='usingCellphone'/>
+          <label for='usingCellphone'>
+            趴在地上滑手機找現成的
+          </label>
+      </div>
+    </form>
+  </div>
+
+  <div class='section'>
+    <section class='section__title'>
+      怎麼知道這個活動的？<span style='color: #e74149'>*</span>
+    </section>
+    <form>
+      <input class='section__input' type='text' placeholder='您的回答'/>
+    </form>
+  </div>
+
+  <div class='section'>
+    <section class='section__title'>
+      其他
+    </section>
+    <div class='section__subtitle'>
+      對活動的一些建議
+    </div>
+    <form>
+      <input class='section__input' type='text' placeholder='您的回答'/>
+    </form>
+  </div>
+
+  <div class='section'>
+    <div class='button'>
+      提交
+    </div>
+  </div>
+  <div class='section'>
+    <div class='section__subtitle' style='margin-bottom: 35px;'>
+      請勿透過表單送出您的密碼。
+    </div>
+  </div>
+</body>
+</html>
