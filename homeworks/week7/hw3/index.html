@@ -1,0 +1,185 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>The HTML5 Herald</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <style>
+    html {
+      font-size: 12px;
+      font-family: '微軟正黑體';
+    }
+
+    html, body, h1, h2, h3, h4, p, {
+      padding: 0px;
+      margin: 0px;
+      border: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .debug *, .debug{
+    }
+
+    .wrapper {
+      position: relative;
+      max-width: 500px;
+      background:pink;
+      margin: 0 auto;
+      padding: 10px 0px;
+      box-shadow: gray 3px 3px 5px 0.5px;
+      
+    }
+
+    .head {
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translate(-50%);
+      margin-top: 20px;
+    }
+
+    .head__button {
+      font-family: '微軟正黑體';
+      font-weight: 700;
+      border: none;
+      height: 30px;
+      width: 50px;
+      margin-left: 10px;
+      vertical-align: bottom;
+    }
+
+    .head__input {
+      border: none;
+      height: 30px;
+      vertical-align: bottom;
+      font-size: 16px;
+    }
+
+    .list {
+      margin-top: 30px;
+      padding-left: 36px;
+      list-style: none; 
+      
+    }
+
+    .item {
+      margin: 10px 0px;
+    }
+
+    .item__checkbox {
+      display: inline-block;
+      width: 20px;
+      height: 24px;
+      border: solid white;
+      vertical-align: bottom;
+      position: relative;
+    }
+
+    .item__title {
+      display: inline-block;
+      font-style: arial;
+      font-size: 16px;
+      color: white;
+      vertical-align: top;
+    }
+
+    .item__button {
+      display: inline-block;
+      font-family: '微軟正黑體';
+      vertical-align: top;
+      position: absolute;
+      right: 40px;
+      border: none;
+      height: 26px;
+    }
+
+    .done .item__title {
+      text-decoration: line-through;
+      
+    }
+
+
+
+
+  </style>
+</head>
+<body class='debug'>
+  <div class='wrapper'>
+    <div class='head'>
+      <input type='text' size='40px' class='head__input'/>
+      <button class='head__button'>新增</button>
+    </div>
+    <ul class='list'>
+
+    </ul>
+  </div>
+
+
+
+  <script>
+    //新增備忘事項//
+    const btn__add = document.querySelector('.head__button')
+    const list = document.querySelector('.list')
+    btn__add.addEventListener('click', function(){
+      const li = document.createElement('li')
+      const value = document.querySelector('.head__input').value
+      if (value === '') {
+        return ''
+      } else {      
+        li.classList.add('item')
+        li.innerHTML=`
+        <input class='item__checkbox' type='checkbox'>
+        <div class='item__title'>${value}</div>
+        <button class='item__button'>刪除</button>
+        `
+        list.appendChild(li)
+      }
+    })
+
+    list.addEventListener('click',(e) => {
+      //delete//
+      if (e.target.tagName === 'BUTTON') {
+        e.target.parentNode.remove()
+      }
+      //checked//
+      if(e.target.tagName === 'INPUT') {
+        if (e.target.checked) {
+          e.target.parentNode.classList.add('done')
+        } else {
+          e.target.parentNode.classList.remove('done')
+        }
+      }
+    })
+
+    
+
+  </script>
+</body>
+</html>
+
+
+<!--流程
+  1. add : submit - get content - create checkbox / text / delete button
+  2. delete : submit - remove checkbox / text / deletebutton
+  3. checked : checked - css style 
+-->
+
+<!--      
+  let list__item = document.createElement('li') //新增 li 子項目//
+  list.appendChild(list__item)
+
+  let list__chcBox = document.createElement('input') //新增子項目 checkbox//
+  list__chcBox.type ='checkbox'
+  list__item.appendChild(list__chcBox)
+
+  let list__cont = document.createElement('h3')  //新增子項目 text 內容//
+  list__cont.innerText = input.value
+  list__item.append(list__cont)
+
+  let list__btn = document.createElement('button') //新增 button 子項目//
+  list__btn.innerText = '刪除'
+  list__item.appendChild(list__btn)
+-->

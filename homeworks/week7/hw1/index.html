@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>'新拖延運動'</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+  <style>
+    html {
+      font-size: 12px;
+      font-family: "微軟正黑體";
+    }
+
+    html, body, h1, h2, h3, h4, p {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .debug *, .debug {
+      outline: 1px solid gold;
+    }
+
+    .background {
+      background: gray;
+    }
+
+    .wrapper  {
+      position: relative;
+      left: 50%;
+      transform: translate(-50%);
+      background: white;
+      max-width: 645px;
+      margin: 0px;
+    }
+
+    .topbar {
+      background: #fad312;
+      width: 100%;
+      height: 8px;
+    }
+
+    .header, .section {
+      margin-left:42px ;
+      margin-right: 42px;
+    }
+
+    .header h1 {
+      padding-top:54px ;
+      padding-bottom: 35px;
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    .header h2 {
+      font-size: 14px;
+    }
+
+    .header h2 + h2 {
+      margin-top: 11px;
+    }
+
+    .header h3 {
+      margin-top: 22px; 
+      font-size: 16px;
+      color: #e74149;
+    }
+
+    .section__title {
+      font-size: 20px;
+      margin-top: 50px;
+    }
+
+    .section__subtitle {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .section__title .text-style-1 {
+      color: var(--faded-red);
+    }
+
+    .section__form {
+      height: 23px;
+      width: 287px;
+      margin-top: 20px;
+    }
+
+    input[type=text] {
+      margin-top: 19px;
+    }
+
+    input[type=radio] { 
+      margin-top: 24px;
+      font-size: 14px;
+      position: relative;
+    }
+
+    input[type=radio]:after { 
+      position: absolute;
+      top:100%;
+      left: 80px;
+    }
+
+    .input__error {
+      color: #e74149;
+      position: absolute;
+    }
+
+    .hidden .input__error {
+      display: none;
+    }
+
+    .button {
+      display: inline-block;
+      height: 40px;
+      width: 92px;
+      background: #fad312;
+      border-radius: 3px;
+      border: none;
+      margin-top: 55px;
+      font-size: 15px;
+      text-align: center;
+      line-height: 40px;
+      transition: transform 0.1s;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      border: none;
+    }
+
+    .buttom {
+      height: 35px;
+    }
+
+    @media(max-width: 420px) {
+    
+
+
+
+
+
+
+
+  </style>
+</head>
+<body class='background'>
+  <div class="wrapper">
+    <form>
+    <div class='topbar'></div>
+    <header class='header'>
+      <h1>新拖延運動報名表單</h1>
+      <h2>活動日期：2020/12/10 ~ 2020/12/11</h2>
+      <h2>活動地點：台北市大安區新生南路二段1號</h2>
+      <h3>*必填</h3>
+    </header>
+    <div class='section hidden'>
+      <section class='section__title'>
+        暱稱 <span style='color: #e74149'>*</span>
+      </section>
+      <input class='section__input__nickname' type='text' placeholder='您的回答' name='nickname'/>
+      <div class='input__error'>請填寫內容</div>
+    </div>
+
+    <div class='section hidden'>
+      <section class='section__title'>
+        電子郵件 <span style='color: #e74149'>*</span>
+      </section>
+      <input class='section__input__email' type='text' placeholder='您的電子郵件' name='email'/>
+      <div class='input__error'>請填寫內容</div>
+    </div>
+
+    <div class='section hidden'>
+      <section class='section__title'>
+        手機號碼 <span style='color: #e74149'>*</span>
+      </section>
+      <input class='section__input__phone' type='text' placeholder='您的手機號碼' name='phone'/>
+      <div class='input__error'>請填寫內容</div>
+    </div>
+
+    <div class='section hidden' id='apply__type'>
+      <section class='section__title'>
+        報名類型 <span style='color: #e74149'>*</span>
+      </section>
+      <div class=input__radio>
+        <label>
+          <input type='radio' class='section__radio' name='type' value="1"/>躺在床上用想像力實作
+        </label><br>
+        <label>
+          <input type='radio' class='section__radio' name='type' value="2"/>趴在地上滑手機找現成的
+        </label>
+      </div>
+      <div class='input__error'>請填寫內容</div>
+    </div>
+
+    <div class='section hidden'>
+      <section class='section__title'>
+        怎麼知道這個活動的？<span style='color: #e74149'>*</span>
+      </section>
+      <input class='section__input__how' type='text' placeholder='您的回答' name='how'/>
+      <div class='input__error'>請填寫內容</div>
+    </div>
+
+    <div class='section hidden'>
+      <section class='section__title'>
+        其他
+      </section>
+      <div class='section__subtitle'>
+        對活動的一些建議
+      </div>
+      <input class='section__input__advice' type='text' placeholder='您的回答' name='advice'/>
+      <div class='input__error'>請填寫內容</div>
+    </div>
+
+    <div class='section'>
+      <input type='submit' class='button'>
+    </div>
+
+    <div class='section'>
+      <div class='section__subtitle'>
+        請勿透過表單送出您的密碼。
+      </div>
+      <div class='buttom'></div>
+    </div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.querySelector('form')
+    form.addEventListener('submit', function(e) {
+      e.preventDefault()
+      error = false
+      const inputs__text = document.querySelectorAll('input[type=text]')
+      let values = {}
+      for (let input of inputs__text) { //for of - ES6 用法可單獨提取元素 //
+        values[input.name]=input.value //語法 : objet['key'] = 'value'//
+        if (!input.value) {
+          error = true
+          input.parentNode.classList.remove('hidden')
+        } else {
+          input.parentNode.classList.add('hidden')
+        }
+      }
+
+      
+      const inputs__radio =document.querySelectorAll('input[type=radio]')
+      const inputs__radio__array = Array.apply(null, inputs__radio)
+      const checked = (input) => input.checked ===true
+      for (let element of inputs__radio__array) {
+        if (element.checked) {
+          values[element.name] = element.value
+        }
+        if (!inputs__radio__array.some(checked)) {  //some.(function) -> 判斷陣列中是否有符合條件的的內容，回傳 boolyn//
+          error = true
+          document.querySelector('#apply__type').classList.remove('hidden')
+        } else {
+          document.querySelector('#apply__type').classList.add('hidden')
+      }}
+      if(!error === true) {
+        alert(JSON.stringify(values))
+      }
+      
+
+      
+      
+
+      
+
+      
+      
+
+      
+      
+    })
+
+  </script>
+</body>
+</html>
+

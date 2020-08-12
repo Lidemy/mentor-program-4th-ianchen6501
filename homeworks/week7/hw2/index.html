@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>咬一口廚房</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <link rel='stylesheet' href='https://necolas.github.io/normalize.css/8.0.1/normalize.css'/>
+  <style>
+    html {
+      font-size: 12px;
+      font-family: '微軟正黑體';
+    }
+
+    html, body, h1, h2, h3, h4, p {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .debug *, .debug {
+      outline: 1px solid gold; 
+    }
+
+    .navbar {
+      box-shadow: -1.4px -1.4px 6px 0 gray;
+      padding-left: 24px;
+    }
+    
+    .wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0px 12px;
+    }
+
+    .navbar .wrapper  {
+      height: 84px;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar__site-name {
+      color: #489846;
+      font-size: 36px;
+    }
+
+    .navbar__list {
+      list-style: none;
+      font-size: 18px;
+      margin: 0px;
+      padding: 0px;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar__list li {
+      padding: 12px 24px;
+      transition: background 0.4s ease-in;
+      border-radius: 8px;
+      margin-left: 12px;
+    }
+
+    .navbar__list li.active,
+    .navbar__list li:hover {
+      background: #ff7286;
+      cursor: pointer;
+
+    }
+
+    .navbar__list li a {
+      text-decoration: none;
+      color:black;
+    }
+
+    .navbar__list li.active a,
+    .navbar__list li:hover a {
+      color: white;
+    }
+
+    .banner:after {
+      content: '';
+      background: rgba(0, 0, 0, 0.3);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    .banner h1 {
+      display: inline-block;
+      color: white;
+      z-index: 1;
+      position: relative;
+      font-size: 40px;
+      font-weight: bold;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+
+    .section {
+      text-align: center;
+      margin-top: 79px;
+    }
+
+    .title {
+      display: inline-block;
+      position: relative;
+      font-size: 36px;
+      font-weight: 800;
+      left: 50%;
+      transform: translate(-50%);
+      padding-left: 15px;
+      border-left: solid 15px #a3dea2;
+      margin-top: 75px;
+    }
+
+    .ques {
+      position: relative;
+      left: 50%;
+      max-width: 810px;
+      transform: translate(-50%);
+      cursor: pointer;
+    }
+
+    .ques__indent {
+      margin-left: 68px;
+    }
+
+    .ques__title {
+      margin-top: 61px;
+      font-size: 18px;
+    }
+
+    .ques__number {
+      display: inline;
+      position: absolute;
+      color: #70b282;
+      top: 0%;
+      left: 17px;
+    }
+
+    .ques__content {
+      margin-top: 24px;
+      font-size: 16px;
+    }
+
+    .ques__buttom {
+      width: 100%;
+      border-top: 1px solid #a6e2c0;
+      margin-top: 28px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+
+    footer {
+      margin-top: 48px;
+    }
+
+    .footer__bottom {
+      background: #35564b;
+      padding: 12px;
+      color: white;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .footer__top {
+      background: #e8efee;
+      padding: 32px 0px;
+      color: #484848;
+    }
+
+    .footer__top .wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer__site {
+      font-size: 36px;
+      color: #489846;
+    }
+
+    .footer__info {
+      margin-right: 16px;
+    }
+
+    .footer__info div {
+      display: block;
+      font-size: 14px;
+      color: #484848;
+    }
+
+    .footer__info div + div {
+      margin-top: 12px;
+    }
+
+    .section__review {
+      display: flex;
+      padding-top: 62px;
+    }
+
+    .section__reviews {
+      background: white;
+      width:100% ;
+      box-shadow: -1.4px -1.4px 4px #d8eaef;
+      border: 1px solid #c7e5ec;
+      text-align: center;
+      line-height: 2em;
+      position: relative;
+    }
+
+    .section__review div + div {
+      margin-left: 16px;
+    }
+
+    .section__reviews p {
+      padding: 90px 24px 20px 24px;
+    }
+
+    .section__reviews h2 {
+      color: black;
+      position: absolute;
+      left: 50%;
+      top: 55px;
+      transform: translate(-50%);
+    }
+
+    .section__reviews div {
+      height: 0px;
+      width: 0px;
+      border: solid 40px transparent;
+      border-radius: 100%;
+      top: 0%;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%,-50%);
+    }
+
+    .section__reviews div img {
+      margin-left: auto;
+      transform: translate(-50%,-50%);
+      max-width: 90px;
+    }
+
+
+    @media(max-width: 768px) {
+      .navbar {
+        padding-left: 0px;
+      }
+
+      .wrapper {
+        padding: 0px;
+      }
+
+      .navbar .wrapper {
+        flex-direction: column;
+        height: 120px;
+        justify-content: space-between;
+      }
+
+      .navbar__list {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .navbar__list li {
+        flex: 1;
+        border-radius: 0;
+        text-align: center;
+        margin-left: 0px;
+      }
+      
+      .navbar__site-name {
+        margin-top: 10px;
+      }
+
+      .btn__query {
+        margin-top: 20px;
+        margin-left: 0px;
+      }
+
+      .section__images {
+        flex-direction: column;
+      }
+
+      .section__images div {
+        width: 100%;
+      }
+
+      .footer__top .wrapper {
+      flex-direction: column-reverse;
+      justify-content: space-between;
+      }
+
+      .footer__info {
+        margin-right: 0px;
+        margin-top: 16px;
+        padding: 0px 20px;
+      }
+
+      .footer__site {
+        padding: 0px 20px;
+      }
+
+      .footer__link {
+        padding: 0px 20px;
+      }
+
+      .section__review {
+      display: flex;
+      flex-direction: column;
+      padding-top: 0px;
+      }
+
+      .section__reviews {
+      margin-top: 80px;
+      }
+
+      .section__review div + div {
+      margin-left: 0px;
+      }
+
+      .ques__content {
+        margin-right: 50px;
+      }
+
+
+    }
+  </style>
+</head>
+<body>
+  <nav class='navbar'>
+    <div class='wrapper'>
+      <div class='navbar__site-name'>
+        Just A Bites!
+      </div>
+      <ul class='navbar__list'>
+        <li class='active'><a href='#''>抽個大獎</a></li>
+        <li><a href='#''>我要點餐</a></li>
+        <li><a href='#''>查詢訂單</a></li>
+        <li><a href='#''>常見問題</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class='title'>
+    FAQ - 常見問題
+  </div>
+
+  <div class='ques' id='Q1'>
+    <div class='ques__indent'>
+      <h2 class='ques__title'>
+        請問用餐需要事先訂位嗎？
+      </h2>
+      <p class='ques__content hidden' id='C1'>
+        為了滿足顧客多方面的需求，並將訂位服務做到最好，我們開放一個月內的訂位，建議您可以直接撥打各分店服務專線，越早預約越有機會選擇您想要的用餐時間喔！各分店預約訂位專線詳見『門市據點一覽表』 (特殊節日開放訂位時間會另行公佈)
+      </p>
+    </div>
+    <h2 class='ques__number'>
+      Q1:
+    </h2>
+    <div class='ques__buttom'></div>
+  </div>
+
+  <div class='ques' id='Q2'>
+    <div class='ques__indent'>
+      <h2 class='ques__title'>
+        請問過年有營業嗎？
+      </h2>
+      <p class='ques__content hidden' id='C2'>
+        只有除夕當天的時間會另行發佈於官網，其餘時間都正常營業。
+      </p>
+    </div>
+    <h2 class='ques__number'>
+      Q2:
+    </h2>
+    <div class='ques__buttom'></div>
+  </div>
+
+  <div class='ques' id='Q3'>
+    <div class='ques__indent'>
+      <h2 class='ques__title'>
+        請問有附設停車場嗎？
+      </h2>
+      <p class='ques__content hidden' id='C3'>
+        目前大部分店家都位於百貨或商場內，皆有附設停車場，也建議搭乘大眾交通運輸工具前往。
+      </p>
+    </div>
+    <h2 class='ques__number'>
+      Q3:
+    </h2>
+    <div class='ques__buttom'></div>
+  </div>
+
+  <div class='ques' id='Q4'>
+    <div class='ques__indent'>
+      <h2 class='ques__title'>
+        請問餐廳內有設立吸煙區嗎？
+      </h2>
+      <p class='ques__content hidden' id='C4'>
+        餐廳皆為開放式空間，未提供吸煙區座位。
+      </p>
+    </div>
+    <h2 class='ques__number'>
+      Q4:
+    </h2>
+    <div class='ques__buttom'></div>
+  </div>
+
+  <div class='ques' id='Q5'>
+    <div class='ques__indent'>
+      <h2 class='ques__title'>
+        請問有提供娃娃的座椅嗎？
+      </h2>
+      <p class='ques__content hidden' id='C5'>
+        全台Mr.Onion天蔥牛排都有特別為小朋友準備娃娃專用座椅，如果有需要可向服務人員告知。
+      </p>
+    </div>
+    <h2 class='ques__number'>
+      Q5:
+    </h2>
+    <div class='ques__buttom'></div>
+  </div>
+
+  <footer class='footer'>
+    <div class='footer__top'>
+      <div class='wrapper'>
+        <div class='footer__info'>
+          <div>餐館地址: 天上地下天堂路三分之一里六段520號</div>
+          <div>訂位專線：02-1314-5566</div>
+          <div>營業時間：週一〜週五 09:00~18:00 / 週六、週日、國定假日（含連假）休息</div>
+          <div>email：service@justabite.com.tw</div>
+        </div>
+        <div>
+          <div class='footer__site'>Just A Bite!</div>
+          <div class='footer__link'>Facebook / Instagram / Youtube</div>
+        </div>
+      </div>
+    </div>
+    <div class ='footer__bottom'>
+      Copyright © 2020 Just A Bite All Rights Reserved. 咬一口股份有限公司版權所有
+    </div>
+  </footer>
+
+  <script>
+    const clickon = (Q,C) => {
+      let ques = document.querySelector(Q)
+      let content = document.querySelector(C)
+      ques.addEventListener('click', function() {
+        if (content.getAttribute('class') === 'ques__content hidden') {
+          content.classList.remove('hidden')
+        } else {
+          content.classList.add('hidden')
+        }
+      })
+    }
+    clickon('#Q1','#C1')
+    clickon('#Q2','#C2')
+    clickon('#Q3','#C3')
+    clickon('#Q4','#C4')
+    clickon('#Q5','#C5')
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+
+
+
+</body>
+</html>
