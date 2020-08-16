@@ -1,0 +1,261 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>Twitch</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <style>
+     html {
+      font-size: 12px;
+      font-family: '微軟正黑體';
+    }
+
+    html, body, h1, h2, h3, h4, p, li {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+    }
+
+    .debug *, .debug {
+      outline: 1px solid gold; 
+    }
+
+    .navbar {
+      height: 70px;
+      background: #858585;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .navbar__title {
+      position: relative;
+      left: 10px;
+      line-height: 70px;
+      font-size: 24px;
+      color: white;
+    }
+
+    .navbar__list {
+      display: inline-flex;
+    }
+
+    .navbar__list div {
+      height: 70px;
+      width: auto;
+      display: inline-block;
+      background:rgba(189, 189, 189, 0.678);
+      text-align: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: white; 
+      border-left: solid 1px white;
+      white-space: normal;
+      overflow: auto;
+      box-sizing: border-box;
+      line-height: 70px;
+      padding: 0px 20px;
+      cursor: pointer;
+    }
+
+    .navbar__list div:hover{
+      background: black;
+    }
+
+    .description {
+      text-align: center;
+      font-size: 40px;
+      margin-top: 20px;
+      font-weight: 900;
+    }
+
+    .section {
+      display: flex;
+      align-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .channel {
+      height: 300px;
+      width: 300px;
+      background: black;
+      opacity: 0.8;
+      margin: 50px auto;
+      outline: 2px;
+      box-shadow: 2px 2px 10px 0px black;
+      transition: 0.3s;
+    }
+
+    .channel:hover {
+      transform: scale(1.05);
+      box-shadow: 5px 5px 15px 0px black;
+    }
+
+    .channel__preview {
+      height: 200px;
+    }
+
+    .channel__info {
+      display: flex;
+      height: 100px;
+      background: black;
+    }
+
+    .channel__logo {
+      height: 100px;
+      width: 100px;
+      background: url(./bd6d67a8-5571-4e91-acd1-b0bc10dbff14-profile_image-300x300.png) round;
+    }
+
+    .channel__detail {
+      display: inline-block;
+      width: 200px;
+      overflow: hidden;
+    }
+
+    .channel__title, .channel__name {
+      display: block;
+      width: 200px;
+      color: white;
+      padding-top: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      box-sizing: border-box;
+      font-size: 12px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .channel__name {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    @media(max-width: 768px) {
+      .navbar {
+      height: auto;
+      background: #858585;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 1px 1px 5px 0px;
+      }
+
+      .navbar__title {
+        font-size: 20px;
+        font-weight: 900;
+        left: 0px;
+        text-align: center;
+      }
+
+      .navbar__list {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .navbar__list div {
+        height: 50px;
+        line-height: 50px;
+        border-left: none;
+        color: white;
+        background: none;
+        font-size: 20px;
+        font-weight: 500;
+      }
+
+      .navbar__list div:hover{
+        background: white;
+        color: black;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <nav class='navbar'>
+    <h2 class='navbar__title'>TWITCH TOP5 GAME STREAM LIVE</h2>
+    <div class='navbar__list'>
+    </div>
+  </nav>
+  <div class='description'>
+  </div>
+  <section class='section'>
+  </section>
+  <script>
+    //取得前五名的數據//
+    const req__top = new XMLHttpRequest()
+    req__top.addEventListener('load', () => {
+      if (req__top.status >=200 && req__top.status <400) {
+        const response = req__top.responseText
+        const json__game = JSON.parse(response)
+        const navbar__list = document.querySelector('.navbar__list')
+        //顯示上方遊戲清單//
+        for(let i=0; i<5; i++) {
+          navbar__list.innerHTML +=`
+          <div>${json__game.top[i].game.name}</div>
+          `
+        }
+        games = document.querySelectorAll('.navbar__list div')
+        selection(games[0].innerText)
+        } else {
+        alert('系統不穩定，請重新載入')
+      }
+    })
+    req__top.open('GET', 'https://api.twitch.tv/kraken/games/top?limit=5' ,false)
+    //.open 之後;.send 之前，語法'XMLHttpRequest.setRequestHeader(header, value)'//
+    req__top.setRequestHeader('Client-ID', 'fk1hf1r42s4jpsch4dxyw50jbqzgqh')
+    req__top.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json')
+    req__top.send()
+
+    //遊戲 channel 切換//
+    function selection(input) {
+    const req__live = new XMLHttpRequest()
+    req__live.addEventListener('load', () => {
+      if (req__live.status >=200 && req__live.status <400) {
+        const response = req__live.responseText
+        const json__channel = JSON.parse(response)
+        const section = document.querySelector('.section')
+        const description = document.querySelector('.description')
+        section.innerHTML=`` //把內容清除//
+        for(let i=0; i<20; i++) {
+          section.innerHTML += `
+            <a href=${json__channel.streams[i].channel.url} class='channel' target='_blank'>
+              <div>
+                <div class='channel__preview' style='background: url(${json__channel.streams[i].preview.large}) round ;'></div>
+                <div class='channel__info'>
+                  <div class='channel__logo' style='background: url(${json__channel.streams[i].channel.logo}) round ;'></div>
+                  <div class='channel__detail'>
+                    <div class='channel__name'>${json__channel.streams[i].channel.display_name}</div>
+                    <div class='channel__title'>${json__channel.streams[i].channel.status}</div>
+                  </div>
+                </div>
+              </div>
+            </a>
+            `
+          description.innerHTML= `
+          ${input}
+          `
+        }
+      } else {
+        alert('系統不穩定，請重新載入')
+      }
+    })
+    req__live.open('GET', `https://api.twitch.tv/kraken/streams/?game=${input}&limit=20` ,true)
+    req__live.setRequestHeader('Client-ID', 'fk1hf1r42s4jpsch4dxyw50jbqzgqh')
+    req__live.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json')
+    req__live.send()
+    }
+    //偵測遊戲點擊//
+    for (let i=0; i<5; i++) {
+      games[i].addEventListener('click', () => {
+      selection(games[i].innerText)
+      })
+    }
+
+  </script>
+</body>
+</html>
