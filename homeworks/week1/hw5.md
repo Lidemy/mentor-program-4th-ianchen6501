@@ -3,9 +3,8 @@
 **前端**主要是處理我們在本地端(手機、電腦、pos機等等)所看到的畫面，以電腦網路來說，前端就像是一個網站呈現出來的內容。前端工程師會撰寫 html 、 CSS 、 Java Script 等語言，電腦透過則透過讀取這些程式碼轉換成畫面，呈現到使用者眼前。  
 **後端**則是遠端的伺服器(server)及資料庫(database)。當我們在前端執行指令的時候，其實電腦不是直接在本地端處理，而是要到後端去處理，在回傳到前端。
 
-## 假設我今天去 Google 首頁搜尋框打上：JavaScri[t 並且按下 Enter，請說出從這一刻開始到我看到搜尋結果為止發生在背後的事情。
+## 假設我今天去 Google 首頁搜尋框打上：JavaScript 並且按下 Enter，請說出從這一刻開始到我看到搜尋結果為止發生在背後的事情。
 在 Google 搜尋框輸入 JavaScript 後，從電腦的網路卡就會發出一個 request 到中華電信的 DNS 伺服器轉換成 IP 位址後傳送到 Google 的 Server ， Server 接受到 request 之後會發出 request 要求 databse 提供關於 JavaScript 相關的搜尋資料，這些搜尋資料會回傳到 Google 的 Server 在一路傳回本端的電腦，再透過瀏覽器呈現出來。
-
 
 ## 請列舉出 3 個「課程沒有提到」的 command line 指令並且說明功用
 1. find . -empty  
