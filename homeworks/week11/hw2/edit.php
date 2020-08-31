@@ -22,8 +22,8 @@ if (!$result) {
 }
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
-$title = $row['title'];
-$content = $row['content'];
+$title = escape($row['title']);
+$content = escape($row['content']);
 //取得錯誤代碼
 $errCode = null;
 $msg = '';

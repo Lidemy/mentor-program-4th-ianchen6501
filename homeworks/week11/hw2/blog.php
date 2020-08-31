@@ -22,9 +22,9 @@ if (!$result) {
 }
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
-$title = $row['title'];
-$content = $row['content'];
-$created_at = $row['created_at'];
+$title = escape($row['title']);
+$content = escape($row['content']);
+$created_at = escape($row['created_at']);
 ?>
 
 <!DOCTYPE html>
