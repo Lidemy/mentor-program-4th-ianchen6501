@@ -138,7 +138,7 @@
                 <input type="checkbox" aria-label="Checkbox for following text input">
               </div>
             </div>
-            <div class="form-control" id="content">${value}</div>
+            <div class="form-control" id="content">${escape(value)}</div>
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button" id="btn-submit">delete</button>
             </div>
@@ -166,7 +166,7 @@
     $('.card-body-list').on('click', 'div.form-control', (e) => {
       const value = $(e.target).text();
       $(e.target).prop("outerHTML", `
-          <input type="text" class="form-control" placeholder="${value}">
+          <input type="text" class="form-control" placeholder="${escape(value)}">
       `)
     })
 
@@ -175,10 +175,10 @@
         const value = $(e.target).val();
         if ($(e.target).parent().children(1).children().children().prop('checked')) {
           $(e.target).prop("outerHTML", `
-          <div class="form-control done" id="content">${value}</div>
+          <div class="form-control done" id="content">${escape(value)}</div>
         `)} else {
           $(e.target).prop("outerHTML", `
-          <div class="form-control" id="content">${value}</div>
+          <div class="form-control" id="content">${escape(value)}</div>
         `)}
       }
     })
@@ -244,7 +244,7 @@
     if (id > 0) {
       $.ajax({
         type: 'GET',
-        url: `http://mentor-program.co/mtr04group2/Ian/week12/todoList/get_todos_api.php?id=${id}`,
+        url: `http://mentor-program.co/mtr04group2/Ian/week12/todoList/get_todos_api.php?id=${escape(id)}`,
         })
         .done((data) => {
           if(!data.ok) {
@@ -262,7 +262,7 @@
                       <input type="checkbox" aria-label="Checkbox for following text input" checked>
                     </div>
                   </div>
-                  <div class="form-control done" id="content">${content.content}</div>
+                  <div class="form-control done" id="content">${escape(content.content)}</div>
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" id="btn-submit">delete</button>
                   </div>
@@ -276,7 +276,7 @@
                       <input type="checkbox" aria-label="Checkbox for following text input">
                     </div>
                   </div>
-                  <div class="form-control" id="content">${content.content}</div>
+                  <div class="form-control" id="content">${escape(content.content)}</div>
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" id="btn-submit">delete</button>
                   </div>
