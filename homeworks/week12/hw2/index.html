@@ -125,6 +125,14 @@
   </div>
 
   <script>
+    function escape(text) {
+      return text
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+    }
     //新增備忘事項//
     $('#btn-submit').click(()=>{
       const value = $('.form-control').val();
