@@ -1,0 +1,453 @@
+
+html {
+  font-size: 10px;
+  font-family: '微軟正黑體';
+}
+
+html, body, h1, h2, h3, h4, p {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.debug *, .debug {
+  outline: 1px solid gold; 
+}
+
+.navbar {
+  box-shadow: -1.4px -1.4px 6px 0 gray;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0px 12px;
+}
+
+.navbar .wrapper  {
+  height: 84px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar__site-name {
+  color: #489846;
+  font-size: 36px;
+}
+
+.navbar__list {
+  list-style: none;
+  font-size: 1.6rem;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar__list li {
+  padding: 12px 24px;
+  transition: background 0.4s ease-in;
+  border-radius: 8px;
+  margin-left: 12px;
+}
+
+.navbar__list li.active,
+.navbar__list li:hover {
+  background: #ff7286;
+  cursor: pointer;
+
+}
+
+.navbar__list li a {
+  text-decoration: none;
+  color:black;
+}
+
+.navbar__list li.active a,
+.navbar__list li:hover a {
+  color: white;
+}
+
+.section {
+  background: url(../img/games-bn.png) no-repeat ;
+  padding: 50px;
+}
+
+.section__changed {
+  padding: 50px;
+}
+
+.content {
+  position: relative;
+  background: white;
+  width: 500px;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 16px;
+}
+
+.content__changed {
+  height: 0px;
+}
+
+.content__title {
+  text-align: center;
+  color: #5ec1b6;
+  font-size: 2.6rem;
+  padding: 40px;
+}
+
+.content__text {
+  text-align: center;
+  font-size: 2rem;
+  padding: 40px;
+}
+
+.content__date {
+  margin-bottom: 24px;
+  display: flex;
+}
+
+.content__prize, .content__Description {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+span[name='heading'] {
+  margin: 0px 20px;
+  font-weight: 800;
+  font-size: 18px;
+  white-space: nowrap; /*換行方式:不換行*/
+}
+
+span[name='detail'] {
+  white-space: pre-wrap; 
+  margin-right: 57px;
+  font-size: 14px;
+  line-height: 26px;
+}
+
+.prize__detail {
+  font-size: 1.6rem;
+}
+
+.bar {
+  margin: 0px 20px;
+  background: #cdcdcd;
+  height: 1px;
+}
+
+.button {
+  height: 55px;
+  width: 400px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  margin-bottom: 20px;
+  background: #e62a45;
+  border-radius: 8px;
+  border: 0px;
+  text-align: center;
+  font-size: 19px;
+  color: white;
+  outline: 0px;
+  transition: background 0.5s;
+}
+
+.button:hover {
+  background: #ec667a;
+}
+
+.button:focus {
+  outline: 0;
+}
+
+#button__back {
+  top: 277px;
+}
+
+.hidden {
+  display: none;
+}
+
+.result__title {
+  position: relative;
+  top: 190px;
+  font-size: 32px;
+  text-align: center;
+}
+
+.footer__bottom {
+  background: #35564b;
+  padding: 12px;
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
+.footer__top {
+  background: #e8efee;
+  padding: 32px 0px;
+  color: #484848;
+}
+
+.footer__top .wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__site {
+  font-size: 36px;
+  color: #489846;
+}
+
+.footer__info {
+  margin-right: 16px;
+}
+
+.footer__info div {
+  display: block;
+  font-size: 14px;
+  color: #484848;
+}
+
+.footer__info div + div {
+  margin-top: 12px;
+}
+
+.section__review {
+  display: flex;
+  padding-top: 62px;
+}
+
+.section__reviews {
+  background: white;
+  width:100% ;
+  box-shadow: -1.4px -1.4px 4px #d8eaef;
+  border: 1px solid #c7e5ec;
+  text-align: center;
+  line-height: 2em;
+  position: relative;
+}
+
+.section__review div + div {
+  margin-left: 16px;
+}
+
+.section__reviews p {
+  padding: 90px 24px 20px 24px;
+}
+
+.section__reviews h2 {
+  color: black;
+  position: absolute;
+  left: 50%;
+  top: 55px;
+  transform: translate(-50%);
+}
+
+.section__reviews div {
+  height: 0px;
+  width: 0px;
+  border: solid 40px transparent;
+  border-radius: 100%;
+  top: 0%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%,-50%);
+}
+
+.section__reviews div img {
+  margin-left: auto;
+  transform: translate(-50%,-50%);
+  max-width: 90px;
+}
+
+.form-group {
+  font-size: 1.8rem;
+}
+
+.form-control {
+  height: 4rem;
+  font-size: 1.8rem;
+}
+
+.btn {
+  font-size: 2rem;
+  padding: 0.3rem 1rem 0.7rem 1rem;
+}
+
+.card-text {
+  font-size: 1.5rem;
+}
+
+.card {
+  display: inline-block;
+  width: 24rem;
+}
+
+.card-img {
+  overflow: hidden;
+  height: 170px;
+}
+
+#prize {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.a {
+  color: #489846;
+}
+
+.a:hover {
+  text-decoration-style: none;
+}
+
+@media(max-width: 768px) {
+  .navbar {
+    padding-left: 0px;
+  }
+
+  .wrapper {
+    padding: 0px;
+  }
+
+  .navbar .wrapper {
+    flex-direction: column;
+    height: 120px;
+    justify-content: space-between;
+  }
+
+  .navbar__list {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navbar__list li {
+    flex: 1;
+    border-radius: 0;
+    text-align: center;
+    margin-left: 0px;
+  }
+  
+  .navbar__site-name {
+    margin-top: 10px;
+  }
+
+  .btn__query {
+    margin-top: 20px;
+    margin-left: 0px;
+  }
+
+  .section__images {
+    flex-direction: column;
+  }
+
+  .section__images div {
+    width: 100%;
+  }
+
+  .footer__top .wrapper {
+  height: 200px;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  }
+
+  .footer__info {
+    margin-right: 0px;
+    margin-top: 16px;
+    padding: 0px 20px;
+  }
+
+  .footer__site {
+    padding: 0px 20px;
+  }
+
+  .footer__link {
+    padding: 0px 20px;
+  }
+
+  .section__review {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0px;
+  }
+
+  .section__reviews {
+  margin-top: 80px;
+  }
+
+  .section__review div + div {
+  margin-left: 0px;
+  }
+
+  .ques__content {
+    margin-right: 50px;
+  }
+  
+  .section {
+    height: auto;
+    background: url(./games-bn.png) repeat ;
+    padding-bottom: 100px;
+  }
+
+  .content {
+    width: 300px;
+    height: auto;
+  }
+
+  .content__title {
+    padding: 10px;
+    text-align: center;
+  }
+
+  .content__date  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content__prize, .content__Description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+
+  #button__draw {
+    top: 75px;
+  }
+
+  .button {
+  height: 55px;
+  width: 200px;
+  position: relative;
+  display: block; /*inline 物件要改成 block 才適用 margin 0 auto */
+  margin: 0 auto;
+  background: #e62a45;
+  border-radius: 8px;
+  border: 0px;
+  text-align: center;
+  font-size: 19px;
+  color: white;
+  outline: 0px;
+  transition: background 0.5s;
+  }
+
+  #button__back {
+  top: 400px;
+  }
+
+  .hidden {
+    display: none;
+  }
+}
