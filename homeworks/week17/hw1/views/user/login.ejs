@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('../template/head') %>
+</head>
+<body>
+  <nav class="navbar">
+    <%- include('../template/nav') %>
+  </nav>
+  <section class="banner">
+    <%- include('../template/section')%>
+  </section>
+  <div class="login-wrapper">
+    <h2>Login</h2>
+    <form action="/login" method="POST">
+      <div class="input__wrapper">
+        <div class="input__label">USERNAME</div>
+        <input class="input__field" type="text" name="username" />
+      </div>
+      
+      <div class="input__wrapper">
+        <div class="input__label">PASSWORD</div>
+        <input class="input__field" type="password" name="password" />
+      </div>
+      <% if(errorMessage) { %>
+        <div class='error'><%= errorMessage %></div>
+      <% } %>
+      <input type='submit' value="登入"/>
+    </form>
+  </div>
+  <%- include('../template/footer') %>
+</body>
+</html>

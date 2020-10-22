@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('./template/head') %>
+</head>
+<body>
+  <nav class="navbar">
+    <%- include('./template/nav') %>
+  </nav>
+  <section class="banner">
+    <%- include('./template/section')%>
+  </section>
+  <!-- 文章預覽 -->
+  <div class="container-wrapper">
+    <div class="posts">
+      <% comments.forEach((comment) => {%>
+      <article class="post">
+        <div class="post__header">
+          <div><%= comment.title %></div>
+          <div class="post__actions">
+            <a class="post__action" href="/readmore/<%= comment.id %>">觀看文章</a>
+          </div>
+        </div>
+      </article>
+    <% }) %>
+    </div>
+  </div>
+  <%- include('./template/footer') %>
+</body>
+</html>

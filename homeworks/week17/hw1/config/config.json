@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "ian",
+    "password": "ian",
+    "database": "sequelize",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "appie6501",
+    "database": "sequelize",
+    "host": "3.137.97.37",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "appie6501",
+    "database": "sequelize",
+    "host": "3.137.97.37",
+    "dialect": "mysql",
+    "use_env_variable": "CLEARDB_DATABASE_URL"
+  }
+}
