@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('./template/head') %>
+  <link rel='stylesheet' href='css/lotteryAndManagemanetPage.css'/>
+  <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+</head>
+<body>
+  <nav class='navbar'>
+    <%- include('./template/nav') %>
+  </nav>
+
+  <div class='container mt-5 mb-5'>
+    <form action='/lottery-management-page' method='POST' id='addPrize'>
+      <div class='form-group'>
+        <label>獎項名稱</label>
+        <input  class='form-control' name='title'>
+      </div>
+      <div class='form-group'>
+        <label>獎項內容</label>
+        <textarea class='form-control' rows='5' name='content'></textarea>
+      </div>
+      <div class='form-group'>
+        <label>得獎機率</label>
+        <input class='form-control' name='probability' placeholder='請輸入 1~100'>
+      </div>
+      <div class='form-group'>
+        <label>圖片網址</label>
+        <input class='form-control' name='photo_url' placeholder='請貼上外部網址'>
+      </div>
+      <button class='btn btn-info'>送出</button>
+      <% if(errorMsg) { %>
+        <div class='errorMsg'><%= errorMsg %></div>
+      <% } %>
+    </form>
+    <!--圖片上傳功能，待完成
+    <div><input type='file' id='fileUploader' accept='.png, .jpg, .jpeg' data-target='fileUploader' multiple='multiple' name='imgFile'></div>
+    -->
+  </div>
+  <div class='container mb-5' id='prize'>
+    <% prizes.forEach((prize) => { %>
+    <div class='card'>
+      <img src='<%= prize.photo_url %>.png' class='card-img' alt='My picture'/>
+      <div class='card-body' id='test'>
+        <h2 class='hidden' id='<%= prize.id %>'></h2>
+        <h2 class='card-title' id='title'><%= prize.title %></h2>
+        <p class='card-text' id='content'><%= prize.content %></p>
+        <h2 class='card-title' id='probability'><%= prize.probability %>%</h2>
+        
+        <form method='GET' action='/lottery-delete/<%= prize.id %>'>
+          <button class='btn btn-outline-primary'>
+            <%- include('./icon/trash') %>
+          </button>
+        </form>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <footer class='footer'>
+    <%- include('./template/footer') %>
+  </footer>
+  <script>
+    /*圖片上傳功能，待完成
+    $(document).ready(() => {
+      const fileUploader = document.querySelector('#fileUploader')
+      const reader = new FileReader()
+      fileUploader.addEventListener('change', (e) => {
+        console.log(e.target.files[0])
+        reader.readAsDataURL(e.target.files[0])
+        reader.onload = (e) => {
+          console.log(e.target.result)
+        }
+      })
+
+      //fileUploader listener
+      //send textFile
+      $('#addPrize').submit((e) => {
+        e.preventDefault()
+        let urlAddText= `/manageLottery`
+        const title = $('[name='title']').serialize().split('=')[1]
+        const content = $('[name='content']').serialize().split('=')[1]
+        const probability = $('[name='probability']').serialize().split('=')[1]
+        const values = {
+          title: title,
+          content: content,
+          probability: probability
+        }
+        const json = JSON.stringify(values)
+        console.log(json)
+        fetch(urlAddText, {
+          method: 'POST',
+          body: json,
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        }).then(text => {
+          return text //body.json() 回傳一個能夠 resolve 回傳的結果的 body text 解析成 JSON 型別的 Promise
+        }).then(result => {
+          alert('success')
+          console.log('add text success:', result)
+        }).catch(error => {
+          alert('fail')
+          console.log('add text error:', error)
+        })
+
+        //send imgFile
+        let form = new FormData()
+        //let title = $('[name='title']').serialize().split('=')[1]
+        let encodeTitle = encodeURI(title) //utf8
+        console.log($('#fileUploader').prop('files')[0])
+        form.append('product[photos][]', $('#fileUploader').prop('files')[0])
+        let urlAddImg = `/lottery-management-page-upload-img/${encodeTitle}`
+        fetch(urlAddImg, {
+          method: 'POST',
+          body: form,
+          headers: new Headers({
+            'Content-Type': 'multipart/form-data'
+          })
+        }).then(text => {
+          return text //body.json() 回傳一個能夠 resolve 回傳的結果的 body text 解析成 JSON 型別的 Promise
+        }).then(result => {
+          alert('success')
+          console.log('add img success:', result)
+        }).catch(error => {
+          alert('fail')
+          console.log('add img error:', error)
+        })
+      })
+    })
+    */
+    //lottery-edit-title listener
+      $('#prize').on('click', 'h2#title', (e) => {
+        const value = $(e.target).text()
+        $(e.target).prop('outerHTML', `<input type='text' class='form-control mt-2 mb-2' placeholder='${value}' id='title' name='${$(e.target).parent().children(1).attr('id')}'>`)
+      })
+
+      $('.card').on('keydown', 'input#title', (e) => {
+        if (e.key == 'enter' || e.keyCode === 13) {
+          if($(e.target).val() !== '') {
+            const value = $(e.target).val();
+            $(e.target).prop('outerHTML', `
+            <h2 class='card-title'   id='title'>${value}</h2>`)
+            const id = $(e.target).attr('name')
+            $.ajax({
+              type: 'POST',
+              url: `/lottery-edit-title/${id}`,
+              data: {title: value}
+            }).done(() => {
+              alert('success')
+            }).fail(()=> {
+              alert('fail')
+            })
+          } else {
+            $(e.target).prop('outerHTML', `
+            <h2 class='card-title' id='title'>${$(e.target).attr('placeholder')}</h2>`)
+          }
+        } 
+      })
+      //lottery-edit-probability listener
+      $('#prize').on('click', 'h2#probability', (e) => {
+        const value = $(e.target).text()
+        $(e.target).prop('outerHTML', `<input type='text' class='form-control mt-2 mb-2' placeholder='${value}' id='probability' name='${$(e.target).parent().children(1).attr('id')}'>`)
+      })
+
+      $('.card').on('keydown', 'input#probability', (e) => {
+        if (e.key == 'enter' || e.keyCode === 13) {
+          if($(e.target).val() !== '') {
+            const value = $(e.target).val();
+            $(e.target).prop('outerHTML', `
+            <h2 class='card-title' id='probability'>${value}%</h2>`)
+            const id = $(e.target).attr('name')
+            $.ajax({
+              type: 'POST',
+              url: `/lottery-edit-probability/${id}`,
+              data: {probability: value}
+            }).done(() => {
+              alert('success')
+            }).fail(()=> {
+              alert('fail')
+            })
+          } else {
+            $(e.target).prop('outerHTML', `
+            <h2 class='card-title' id='probability'>${$(e.target).attr('placeholder')}</h2>`)
+          }
+        }
+      })
+      //lottery-edit-content listener
+      $('#prize').on('click', 'p#content', (e) => {
+        const value = $(e.target).text()
+        $(e.target).prop('outerHTML', `<textarea class='form-control mt-2 mb-2' placeholder='${value}' rows='2' id='content' name='${$(e.target).parent().children(1).attr('id')}'>`)
+      })
+
+      $('.card').on('keydown', 'textarea#content', (e) => {
+        if (e.key == 'enter' || e.keyCode === 13) {
+          if($(e.target).val() !== '') {
+            const value = $(e.target).val();
+            $(e.target).prop('outerHTML', `
+            <p class='card-text' id='content'>${value}</p>`)
+            const id = $(e.target).attr('name')
+            $.ajax({
+              type: 'POST',
+              url: `/lottery-edit-content/${id}`,
+              data: {content: value}
+            }).done(() => {
+              alert('success')
+            }).fail(()=> {
+              alert('fail')
+            })
+          } else {
+            $(e.target).prop('outerHTML', `
+            <p class='card-text' id='content'>${$(e.target).attr('placeholder')}</p>`)
+          }
+        }
+      })
+      //lottery-edit-img listener
+      $('#prize').on('click', '.card-img', (e) => {
+        $(e.target).prop('outerHTML', `<textarea class='form-control' rows='2' placeholder='${$(e.target).attr('src')}' name='${$(e.target).parent().children().children(1).attr('id')}'>`)
+      })
+
+      $('.card').on('keydown', 'textarea.form-control', (e) => {
+        if (e.key == 'enter' || e.keyCode === 13) {
+          if($(e.target).val() !== '') {
+            const value = $(e.target).val();
+            $(e.target).prop('outerHTML', `
+            <img src='${value}.png' class='card-img' alt='My picture'/>`)
+            const id = $(e.target).attr('name')
+            $.ajax({
+              type: 'POST',
+              url: `/lottery-edit-img/${id}`,
+              data: {img: value}
+            }).done(() => {
+              alert('success')
+            }).fail(()=> {
+              alert('fail')
+            })
+          } else {
+            $(e.target).prop('outerHTML', `
+            <img src='${$(e.target).attr('placeholder')}.png' class='card-img' alt='My picture'/>`)
+          }
+        }
+      })
+  </script>
+
+</body>
+</html>

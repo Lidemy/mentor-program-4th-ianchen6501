@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('./template/head') %>
+  <link rel='stylesheet' href='css/QuestionAnswer.css'/>
+</head>
+<body>
+  <nav class='navbar'>
+    <%- include('./template/nav') %>
+  </nav>
+  <div class='title'>
+    FAQ - 常見問題
+  </div>
+  <% for(let i=0; i<qas.length; i++) { %>
+  <div class='ques' id='Q<%= i+1 %>'>
+    <div class='ques__indent'>
+      <h2 class='ques__title'><%= qas[i].title %></h2>
+      <p class='ques__content hidden' id='C<%= i+1 %>'><%= qas[i].content %></p>
+    </div>
+    <h2 class='ques__number'>Q<%= i+1 %>:</h2>
+    <div class='ques__buttom'></div>
+  </div>
+  <% } %>
+  <footer class='footer'>
+    <%- include('./template/footer') %>
+  </footer>
+</body>
+</html>
+<script>
+  window.onload = () => {
+    const clickon = (Q,C) => {
+      let ques = document.querySelector(Q)
+      let content = document.querySelector(C)
+      ques.addEventListener('click', function() {
+        if (content.getAttribute('class') === 'ques__content hidden') {
+          content.classList.remove('hidden')
+        } else {
+          content.classList.add('hidden')
+          }
+      })
+    }
+    for(let i=0; i< <%= qas.length %>; i++) {
+      clickon(`#Q${i+1}`,`#C${i+1}`)
+    }
+  }
+</script>
