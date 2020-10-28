@@ -7,15 +7,15 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "appie6501",
+    "username": "ian",
+    "password": "ian",
     "database": "w17_bite",
     "host": "localhost",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "appie6501",
+    "username": "ian",
+    "password": "ian",
     "database": "w17_bite",
     "host": "localhost",
     "dialect": "mysql"

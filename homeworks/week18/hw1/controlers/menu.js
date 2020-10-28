@@ -1,15 +1,9 @@
 const db = require('../models')
 const dishes = db.dishes
+const utils = require('./utils')
 
 const menuControler = {
-  index : (req, res) => {
-    dishes.findAll({
-      where : { is_deleted : null},
-      //include: user,
-      order: [['id', 'DESC']]
-    }).then(dishes => {
-      res.render('../views/menu', {dishes})
-    })
-  }
+  index : utils.getAllDataAndRender(dishes, '../views/menu')
 }
+
 module.exports = menuControler

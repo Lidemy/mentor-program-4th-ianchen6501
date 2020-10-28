@@ -1,5 +1,6 @@
 const db = require('../models')
 const prizes = db.prizes
+const utils = require('./utils')
 
 function getArr(arr, attr) {
   let result = []
@@ -32,18 +33,8 @@ function weightedRamdom(items, itemsWeight) {
 }
 
 const lotteryFrontControler = {
-  pull: (req, res) => {
-    prizes.findAll({
-      where : { is_deleted : null},
-      order: [['id', 'DESC']]
-    }).then(prizes => {
-      res.render('../views/lottery-frontpage-pull', {prizes})
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
+  pull: utils.getAllDataAndRender(prizes, '../views/lottery-frontpage-pull'),
+  
   result: (req, res) => {
     prizes.findAll({
       where : { is_deleted : null},
@@ -66,6 +57,5 @@ const lotteryFrontControler = {
     })
   }
 }
-
 
 module.exports = lotteryFrontControler

@@ -1,19 +1,9 @@
 const db = require('../models')
 const dishes = db.dishes
+const utils = require('./utils')
 
 const dishesControler = {
-  index : (req, res) => {
-    dishes.findAll({
-      where : { is_deleted : null},
-      //include: user,
-      order: [['id', 'DESC']]
-    }).then(dishes => {
-      res.render('../views/dishes-management-page', {dishes})
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('/')
-    })
-  },
+  index : utils.getAllDataAndRender(dishes, '../views/dishes-management-page'),
 
   add: (req, res) => {
     if(req.body.title === '' || req.body.console === '' || req.body.price ==='' || req.body.photo_url === '') {
@@ -37,85 +27,12 @@ const dishesControler = {
     })
   },
 
-  delete: (req, res) => {
-    const id = req.params.id
-    dishes.findOne({
-      where : { id : id}
-    }).then(dish => {
-      dish.update({
-        is_deleted : 1
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
+  delete: utils.deleteItem(dishes),
 
-  editTitle: (req, res) => {
-    const id = req.params.id
-    const content = req.body.title
-    dishes.findOne({
-      where : { id : id}
-    }).then(dish => {
-      dish.update({
-        title : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  editContent: (req, res) => {
-    const id = req.params.id
-    const content = req.body.content
-    dishes.findOne({
-      where : { id : id}
-    }).then(dish => {
-      dish.update({
-        content : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  editPrice: (req, res) => {
-    const id = req.params.id
-    const content = req.body.price
-    dishes.findOne({
-      where : { id : id}
-    }).then(dish => {
-      dish.update({
-        price : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  editImg: (req, res) => {
-    const id = req.params.id
-    const content = req.body.img
-    dishes.findOne({
-      where : { id : id}
-    }).then(dish => {
-      dish.update({
-        photo_url : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
+  editTitle: utils.editData(dishes, 'title'),
+  editContent: utils.editData(dishes, 'content'),
+  editPrice: utils.editData(dishes, 'price'),
+  editImg: utils.editData(dishes, 'photo_url'),
 }
 
 module.exports = dishesControler

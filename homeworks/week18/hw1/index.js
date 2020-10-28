@@ -23,7 +23,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(session({
-  secret: 'keyboard cat', //加密方式
+  secret: process.env.secret, //加密方式
   resave: true, //強制將 session 存回 session store
   saveUninitialized: true, //強制將未初始化的session存回 session store
 }))
@@ -44,7 +44,6 @@ app.get('/with-cors', cors(), (req, res, next) => {
   res.json({ msg: 'WHOAH with CORS it works! 🔝 🎉' })
 })
 */
-
 app.get('/', homepageFrontControler.index)
 app.get('/lottery-management-page', lotteryPostControler.index)
 app.post('/lottery-management-page', lotteryPostControler.add)

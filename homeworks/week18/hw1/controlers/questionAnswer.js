@@ -1,32 +1,10 @@
 const db = require('../models')
 const questionAnswer = db.question_answers
+const utils = require('./utils')
 
 const questionAnswerControler = {
-  frontpageIndex: (req, res)=> {
-    questionAnswer.findAll({
-      where : { is_deleted : null},
-      order: [['id', 'ASC']]
-    }).then(qas => {
-      res.locals.test = 'hi'
-      res.render('../views/question-answer', {qas})
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  postpageIndex : (req, res) => {
-    questionAnswer.findAll({
-      where : { is_deleted : null},
-      //include: user,
-      order: [['id', 'ASC']]
-    }).then(qas => {
-      res.render('../views/question-answer-management-page', {qas})
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('/')
-    })
-  },
+  frontpageIndex: utils.getAllDataAndRender(questionAnswer, '../views/question-answer'),
+  postpageIndex : utils.getAllDataAndRender(questionAnswer, '../views/question-answer-management-page'),
 
   add: (req, res) => {
     if(req.body.title === '' || req.body.console === '') {
@@ -46,53 +24,9 @@ const questionAnswerControler = {
     })
   },
 
-  delete: (req, res) => {
-    const id = req.params.id
-    questionAnswer.findOne({
-      where : { id : id}
-    }).then(qa => {
-      qa.update({
-        is_deleted : 1
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  editTitle: (req, res) => {
-    const id = req.params.id
-    const content = req.body.title
-    questionAnswer.findOne({
-      where : { id : id}
-    }).then(qa => {
-      qa.update({
-        title : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  editContent: (req, res) => {
-    const id = req.params.id
-    const content = req.body.content
-    questionAnswer.findOne({
-      where : { id : id}
-    }).then(qa => {
-      qa.update({
-        content : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
+  delete: utils.deleteItem(questionAnswer),
+  editTitle: utils.editData(questionAnswer, 'title'),
+  editContent: utils.editData(questionAnswer, 'content'),
 }
 
 module.exports = questionAnswerControler

@@ -38,7 +38,8 @@
     -->
   </div>
   <div class='container mb-5' id='prize'>
-    <% prizes.forEach((prize) => { %>
+    <% const prizes = data
+      prizes.forEach((prize) => { %>
     <div class='card'>
       <img src='<%= prize.photo_url %>.png' class='card-img' alt='My picture'/>
       <div class='card-body' id='test'>
@@ -227,7 +228,7 @@
             $.ajax({
               type: 'POST',
               url: `/lottery-edit-img/${id}`,
-              data: {img: value}
+              data: {photo_url: value}
             }).done(() => {
               alert('success')
             }).fail(()=> {

@@ -11,7 +11,8 @@
   <div class='title'>
     FAQ - 常見問題
   </div>
-  <% for(let i=0; i<qas.length; i++) { %>
+  <% const qas = data
+  for(let i=0; i<qas.length; i++) { %>
   <div class='ques' id='Q<%= i+1 %>'>
     <div class='ques__indent'>
       <h2 class='ques__title'><%= qas[i].title %></h2>

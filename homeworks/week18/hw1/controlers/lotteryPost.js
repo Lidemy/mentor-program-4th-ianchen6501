@@ -1,19 +1,9 @@
 const db = require('../models')
 const prizes = db.prizes
+const utils = require('./utils')
 
 const lotteryPostControler = {
-  index: (req, res) => {
-    prizes.findAll({
-      where : { is_deleted : null},
-      //include: user,
-      order: [['id', 'DESC']]
-    }).then(prizes => {
-      res.render('../views/lottery-management-page', {prizes})
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('/')
-    })
-  },
+  index: utils.getAllDataAndRender(prizes, '../views/lottery-management-page'),
 
   add: (req, res) => {
     if(req.body.title === '' || req.body.console === '' || req.body.probability ==='' || req.body.photo_url === '') {
@@ -38,84 +28,11 @@ const lotteryPostControler = {
     })
   },
 
-  delete: (req, res) => {
-    const id = req.params.id
-    prizes.findOne({
-      where : { id : id}
-    }).then(prize => {
-      prize.update({
-        is_deleted : 1
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  editTitle: (req, res) => {
-    const id = req.params.id
-    const content = req.body.title
-    prizes.findOne({
-      where : { id : id}
-    }).then(prize => {
-      prize.update({
-        title : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  editProbability: (req, res) => {
-    const id = req.params.id
-    const content = req.body.probability
-    prizes.findOne({
-      where : { id : id}
-    }).then(prize => {
-      prize.update({
-        probability : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  editContent: (req, res) => {
-    const id = req.params.id
-    const content = req.body.content
-    prizes.findOne({
-      where : { id : id}
-    }).then(prize => {
-      prize.update({
-        content : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
-
-  editImg: (req, res) => {
-    const id = req.params.id
-    const content = req.body.img
-    prizes.findOne({
-      where : { id : id}
-    }).then(prize => {
-      prize.update({
-        photo_url : content
-      })
-      res.redirect('back')
-    }).catch(error => {
-      console.log(error.toString())
-      res.redirect('back')
-    })
-  },
+  delete: utils.deleteItem(prizes),
+  editTitle: utils.editData(prizes, 'title'),
+  editProbability: utils.editData(prizes, 'probability'),
+  editContent: utils.editData(prizes, 'content'),
+  editImg: utils.editData(prizes, 'photo_url'),
 
   addImg: (req, res) => {
     const file = req.body

@@ -27,7 +27,8 @@
       <div class='content__prize'>
         <span name='heading'>獎  品：</span>
         <div>
-        <% for(let i = 0; i < prizes.length; i++) { %>
+        <% const prizes = data
+          for(let i = 0; i < prizes.length; i++) { %>
         <div class='prize__detail'><%= i+1 %>. <%= prizes[i].title %></div>
         <% } %> 
         </div>

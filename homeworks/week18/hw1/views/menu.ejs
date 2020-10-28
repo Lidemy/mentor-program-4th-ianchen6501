@@ -51,7 +51,8 @@
   </div>
 
   <div class='wrapper center menu'>
-    <% dishes.forEach(dish => { %>
+    <% const dishes = data
+      dishes.forEach(dish => { %>
     <div class='recipe'>
       <img src='<%= dish.photo_url %>.png'>
       <div class='recipe__title'>

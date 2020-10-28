@@ -37,7 +37,8 @@
     </form>
   </div>
   <div class='container mb-5' id='dish'>
-    <% dishes.forEach((dish) => { %>
+    <% const dishes = data
+      dishes.forEach((dish) => { %>
     <div class='card'>
       <img src='<%= dish.photo_url %>.png' class='card-img' alt='My picture'/>
       <div class='card-body' id='test'>
@@ -149,7 +150,7 @@
             $(e.target).prop('outerHTML', `
             <img src='${value}.png' class='card-img' alt='My picture'/>`)
             const id = $(e.target).attr('name')
-            updatePost('dishes-edit-img', 'img', id, value)
+            updatePost('dishes-edit-img', 'photo_url', id, value)
           } else {
             $(e.target).prop('outerHTML', `
             <img src='${$(e.target).attr('placeholder')}.png' class='card-img' alt='My picture'/>`)
