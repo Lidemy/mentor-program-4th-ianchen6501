@@ -78,7 +78,7 @@ async function handle(req, res) {
 User.findBy({
   id: 1
 }).then(user => {
-  return user.destory()
+  return user.destory() //會等他處理完並傳入下一個 .then function
 }).then(() => {
   res.redirect('/')
 })

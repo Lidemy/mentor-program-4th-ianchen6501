@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include('./template/head') %>
+  <link rel='stylesheet' href='css/lotteryAndManagemanetPage.css'/>
+  <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+</head>
+<body>
+  <nav class='navbar'>
+    <%- include('./template/nav') %>
+  </nav>
+
+  <div class='container mt-5 mb-5'>
+    <form action='/dishes-management-page' method='POST'>
+      <div class='form-group'>
+        <label>菜色名稱</label>
+        <input  class='form-control' name='title'>
+      </div>
+      <!-- 暫時不用  
+      <div class='form-group'>
+        <label>菜色內容</label>
+        <textarea class='form-control' rows='5' name='content'></textarea>
+      </div>
+      -->
+      <div class='form-group'>
+        <label>價格</label>
+        <input class='form-control' name='price' placeholder='請輸入金額'>
+      </div>
+      <div class='form-group'>
+        <label>圖片網址</label>
+        <input class='form-control' name='photo_url' placeholder='請貼上外部網址'>
+      </div>
+      <button class='btn btn-info'>送出</button>
+      <% if(errorMsg) { %>
+        <div class='errorMsg'><%= errorMsg %></div>
+      <% } %>
+    </form>
+  </div>
+  <div class='container mb-5' id='dish'>
+    <% const dishes = data
+      dishes.forEach((dish) => { %>
+    <div class='card'>
+      <img src='<%= dish.photo_url %>.png' class='card-img' alt='My picture'/>
+      <div class='card-body' id='test'>
+        <h2 class='hidden' id='<%= dish.id %>'></h2>
+        <h2 class='card-title' id='title'><%= dish.title %></h2>
+        <!-- 暫時不用 
+        <p class='card-text' id='content'><%= dish.content %></p>
+        -->
+        <h2 class='card-title' id='price'><%= dish.price %>NT</h2>
+        
+        <form method='GET' action='/dishes-delete/<%= dish.id %>'>
+          <button class='btn btn-outline-primary'>
+            <%- include('./icon/trash') %>
+          </button>
+        </form>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <footer class='footer'>
+    <%- include('./template/footer') %>
+  </footer>
+
+  <script>
+    function updatePost (path, keyValue, id, value) {
+      const obj = {}
+      obj[keyValue] = value
+      $.ajax({
+        type: 'POST',
+        url: `/${path}/${id}`,
+        data: obj
+      }).done(() => {
+        alert('success')
+      }).fail(error => {
+        console.log(error)
+        alert('fail')
+      })
+    }
+
+    //dishes-edit-title listener
+      $('#dish').on('click', 'h2#title', (e) => {
+        const value = $(e.target).text()
+        $(e.target).prop('outerHTML', `<input type='text' class='form-control mt-2 mb-2' placeholder='${value}' id='title' name='${$(e.target).parent().children(1).attr('id')}'>`)
+      })
+
+      $('.card').on('keydown', 'input#title', (e) => {
+        if (e.key == 'enter' || e.keyCode === 13) {
+          if($(e.target).val() !== '') {
+            const value = $(e.target).val();
+            $(e.target).prop('outerHTML', `
+            <h2 class='card-title'   id='title'>${value}</h2>`)
+            const id = $(e.target).attr('name')
+            updatePost ('dishes-edit-title', 'title', id, value)
+          } else {
+            $(e.target).prop('outerHTML', `
+            <h2 class='card-title' id='title'>${$(e.target).attr('placeholder')}</h2>`)
+          }
+        } 
+      })
+      //dishes-edit-price listener
+      $('#dish').on('click', 'h2#price', (e) => {
+        const value = $(e.target).text()
+        $(e.target).prop('outerHTML', `<input type='text' class='form-control mt-2 mb-2' placeholder='${value}' id='price' name='${$(e.target).parent().children(1).attr('id')}'>`)
+      })
+
+      $('.card').on('keydown', 'input#price', (e) => {
+        if (e.key == 'enter' || e.keyCode === 13) {
+          if($(e.target).val() !== '') {
+            const value = $(e.target).val();
+            $(e.target).prop('outerHTML', `
+            <h2 class='card-title' id='price'>${value}NT</h2>`)
+            const id = $(e.target).attr('name')
+            updatePost('dishes-edit-price', 'price', id, value)
+          } else {
+            $(e.target).prop('outerHTML', `
+            <h2 class='card-title' id='price'>${$(e.target).attr('placeholder')}</h2>`)
+          }
+        }
+      })
+      //dishes-edit-content listener
+      $('#dish').on('click', 'p#content', (e) => {
+        const value = $(e.target).text()
+        $(e.target).prop('outerHTML', `<textarea class='form-control mt-2 mb-2' placeholder='${value}' rows='2' id='content' name='${$(e.target).parent().children(1).attr('id')}'>`)
+      })
+
+      $('.card').on('keydown', 'textarea#content', (e) => {
+        if (e.key == 'enter' || e.keyCode === 13) {
+          if($(e.target).val() !== '') {
+            const value = $(e.target).val();
+            $(e.target).prop('outerHTML', `
+            <p class='card-text' id='content'>${value}</p>`)
+            const id = $(e.target).attr('name')
+            updatePost('dishes-edit-content', 'content', id, value)
+          } else {
+            $(e.target).prop('outerHTML', `
+            <p class='card-text' id='content'>${$(e.target).attr('placeholder')}</p>`)
+          }
+        }
+      })
+      //dishes-edit-img listener
+      $('#dish').on('click', '.card-img', (e) => {
+        $(e.target).prop('outerHTML', `<textarea class='form-control' rows='2' placeholder='${$(e.target).attr('src')}' name='${$(e.target).parent().children().children(1).attr('id')}'>`)
+      })
+
+      $('.card').on('keydown', 'textarea.form-control', (e) => {
+        if (e.key == 'enter' || e.keyCode === 13) {
+          if($(e.target).val() !== '') {
+            const value = $(e.target).val();
+            $(e.target).prop('outerHTML', `
+            <img src='${value}.png' class='card-img' alt='My picture'/>`)
+            const id = $(e.target).attr('name')
+            updatePost('dishes-edit-img', 'photo_url', id, value)
+          } else {
+            $(e.target).prop('outerHTML', `
+            <img src='${$(e.target).attr('placeholder')}.png' class='card-img' alt='My picture'/>`)
+          }
+        }
+      })
+
+
+  </script>
+
+</body>
+</html>
