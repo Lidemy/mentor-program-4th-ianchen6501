@@ -1,15 +1,1 @@
-dishes.js
-index.js
-prizes.js
-question_answers.js
-Users.js
-20201016051430-create-Users.js
-20201022124221-create-dishes.js
-20201024094543-create-prizes.js
-20201026034703-create-question-answers.js
-homepage.js
-lotteryFront.js
-lotteryPost.js
-menu.js
-questionAnswer.js
-utils.js
+*.js
